@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="col-md-8">
+    <h1> My Wishlist</h1>
+
+    <div class="cart-table">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Item</th>
+
+                    <th>Price</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+
+                {% for wishlist in wish_list %}
+                {% if wishlist.user == user %}
+                <tr>
+                    <td>{{ wishlist.product.name }}</td>
+
+                    <td>{{ wishlist.product.price }}</td>
+
+                </tr>
+                {% endif %}
+
+
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+{% endblock %}

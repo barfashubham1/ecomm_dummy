@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load multiply %}
+{% block content %}
+<div class="col-md-8">
+    <h1> My Cart</h1>
+    <!-- {{ cart_list }} -->
+    <div class="cart-table">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                {% for cart in cart_list %}
+                {% if cart.user == user %}
+                <tr>
+                    <td>{{ cart.product }}</td>
+                    <td><input type="number" name="" value="{{ cart.quantity }}"></td>
+                    <td>{{ cart.product.price }}</td>
+                    <td class="unit_total">{{ cart.product.price|mul:cart.quantity }}</td>
+                </tr>
+                {% endif %}
+
+
+
+                {% endfor %}
+                <tr>
+                    <!-- <td><button data-product="{{ product.id }}" data-action="add_wishlist" class="btn btn-warning update-cart">Update Cart</button></td> -->
+                    <td><b>Quantity-</b></td>
+                    <td>
+                        {% for value in cart_qty.values %}
+                        {{ value }}
+                        {% endfor %}
+                    </td>
+                    <td><b>Cart Total-</b></td>
+                    <td class="total">
+                        {{ cart_total }}
+                    </td>
+                </tr>
+
+
+            </tbody>
+
+        </table>
+
+        <div>
+            <a href="{% url 'products:order' %}" class="btn btn-primary btn-lg">Order</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
